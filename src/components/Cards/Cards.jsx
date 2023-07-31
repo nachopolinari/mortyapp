@@ -1,11 +1,14 @@
-import Card from './Card';
+import Card from '../Card/Card';
 
-const Cards = ({ characters }) => {
+const Cards = ({ characters, onClose }) => {
+   //el componente Cards recibe el array characters y lo mapea. por cada char renderiza una Card y le pasa info por props
+
    return (<div>
       {
          characters.map((char) => {
             return <Card
-               onClose={() => window.alert('Emulamos que se cierra la card')}
+               onClose={onClose}
+               id={char.id}
                key={char.id}
                name={char.name}
                status={char.status}
