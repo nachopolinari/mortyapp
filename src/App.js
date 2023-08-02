@@ -1,13 +1,15 @@
 import './App.css';
 import axios from 'axios';
-import { useState } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { useState, useEffect } from 'react';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import Cards from './components/Cards/Cards.jsx';
 import NavBar from './components/Navbar/NavBar';
 import About from './components/About/About';
 import Detail from './components/Detail/Detail';
 import NotFound from './components/NotFound/NotFound';
 import Form from './components/Form/Form';
+const EMAIL = 'morty@EarthC137.com';
+const PASSWORD = '1Password';
 
 function App() {
 
@@ -15,10 +17,20 @@ function App() {
    const { pathname } = useLocation();
    //en pathname guardo donde esta parado el usuario (localhost:3000/)
 
-   // const onSearch = (id) => {
-   //    setCharacters([...characters, example])
-   // }
+   const navigate = useNavigate();
+   const [access, setAccess] = useState(false);
 
+
+   function login(userData) {
+      if (userData.password === PASSWORD && userData.email === EMAIL) {
+         setAccess(true);
+         navigate('/home');
+      }
+   }
+
+   useEffect(() => {
+      !access && navigate('/');
+   }, [access]);
 
 
    function onSearch(id) {
@@ -54,7 +66,7 @@ function App() {
          {/*si el usuario esta parado (pathname) en una ruta diferente a '/' , renderizo Navbar;  si no, NO*/}
 
          <Routes>
-            <Route path='/' element={<Form />} />
+            <Route path='/' element={<Form login={login} />} />
             <Route path='*' element={<Cards characters={characters} onClose={onClose} />} />
             <Route path='/about' element={<About />} />
             <Route path='/detail/:id' element={<Detail />} />
