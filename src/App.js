@@ -1,25 +1,19 @@
 import './App.css';
+import axios from 'axios';
+import { useState } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Cards from './components/Cards/Cards.jsx';
 import NavBar from './components/Navbar/NavBar';
-import { useState } from 'react';
-import axios from 'axios';
-
-// const example = {
-//    id: 1,
-//    name: 'Rick Sanchez',
-//    status: 'Alive',
-//    species: 'Human',
-//    gender: 'Male',
-//    origin: {
-//       name: 'Earth (C-137)',
-//       url: 'https://rickandmortyapi.com/api/location/1',
-//    },
-//    image: 'https://rickandmortyapi.com/api/character/avatar/1.jpeg',
-// };
+import About from './components/About/About';
+import Detail from './components/Detail/Detail';
+import NotFound from './components/NotFound/NotFound';
+import Form from './components/Form/Form';
 
 function App() {
 
-   const [characters, setCharacters] = useState([])
+   const [characters, setCharacters] = useState([]);
+   const { pathname } = useLocation();
+   //en pathname guardo donde esta parado el usuario (localhost:3000/)
 
    // const onSearch = (id) => {
    //    setCharacters([...characters, example])
@@ -34,10 +28,10 @@ function App() {
          if (data.name) {
 
             const isCharacterExist = characters.some((character) => character.id === data.id)
-            if(!isCharacterExist){
-            setCharacters((oldChars) => [...oldChars, data]);
-         }else{window.alert('!El personaje ya fue agregado')}
-      }
+            if (!isCharacterExist) {
+               setCharacters((oldChars) => [...oldChars, data]);
+            } else { window.alert('!El personaje ya fue agregado') }
+         }
          else {
             window.alert('¡No hay personajes con este ID!');
          }
@@ -56,8 +50,18 @@ function App() {
 
    return (
       <div className='App'>
-         <NavBar onSearch={onSearch} />
-         <Cards characters={characters} onClose={onClose} />
+         {pathname !== '/' && <NavBar onSearch={onSearch} />}
+         {/*si el usuario esta parado (pathname) en una ruta diferente a '/' , renderizo Navbar;  si no, NO*/}
+
+         <Routes>
+            <Route path='/' element={<Form />} />
+            <Route path='*' element={<Cards characters={characters} onClose={onClose} />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/detail/:id' element={<Detail />} />
+            {/*<Route path='*' element={<NotFound />} />*/}
+         </Routes>
+
+
       </div>
    );
 }

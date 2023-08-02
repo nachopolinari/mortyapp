@@ -1,0 +1,17 @@
+.card{
+    border: 3px solid black;
+    border-radius:30%;
+    overflow:hidden;
+background-color: rgba(46, 247, 76, 0.693);
+margin:1em;
+margin-bottom:1em;
+}
+
+.name{
+    text-decoration:overline
+}
+.buttonclose{
+    background-color: rgba(251, 17, 17, 0.84);
+    border-radius: 50%;
+    
+}
