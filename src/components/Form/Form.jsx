@@ -46,6 +46,11 @@ const Form = ({login}) => {
 
                 <button type="submit" onClick={handleSubmit}>Submit</button>
 
+<p>Recordatorio para Mortys:  </p>
+<p>EMAIL = morty@EarthC137.com 
+    <br/>
+    PASSWORD = JessicaL0v3</p>
+
             </form>
         </div>
     )

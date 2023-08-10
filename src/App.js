@@ -8,8 +8,9 @@ import About from './components/About/About';
 import Detail from './components/Detail/Detail';
 import NotFound from './components/NotFound/NotFound';
 import Form from './components/Form/Form';
+import Favorites from './components/Favorites/Favorites';
 const EMAIL = 'morty@EarthC137.com';
-const PASSWORD = '1Password';
+const PASSWORD = 'JessicaL0v3';
 
 function App() {
 
@@ -70,7 +71,8 @@ function App() {
             <Route path='*' element={<Cards characters={characters} onClose={onClose} />} />
             <Route path='/about' element={<About />} />
             <Route path='/detail/:id' element={<Detail />} />
-            {/*<Route path='*' element={<NotFound />} />*/}
+            <Route path='/favorites' element={<Favorites />}/>
+               {/*<Route path='*' element={<NotFound />} />*/}
          </Routes>
 
 
