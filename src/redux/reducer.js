@@ -24,16 +24,16 @@ const reducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                myFavorites: state.allCharactersFiltered
+                myFavorites: allCharactersFiltered
             }
 
         case 'ORDER':
-            const allCharactersFavCopy = [...state.allCharactersFav]
+            const allCharactersFavCopy = [...state.allCharactersFav];
             return {
                 ...state,
                 myFavorites: action.payload === 'A'
-                    ? allCharactersFavCopy.sort((a, b) => a.id < b.id)
-                    : allCharactersFavCopy.sort((a, b) => b.id < a.id)
+                    ? allCharactersFavCopy.sort((a, b) => a.id - b.id)
+                    : allCharactersFavCopy.sort((a, b) => b.id - a.id)
             }
 
         default:
